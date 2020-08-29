@@ -1,1 +1,1 @@
-web: gunicorn notre-finances.wsgi --log-file -
+web: gunicorn wsgi --log-file -
