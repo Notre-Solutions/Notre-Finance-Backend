@@ -32,4 +32,6 @@ def calcSaveAmountPerMonth():
   
   return {"savePerMonth": 0, "savingPeriod": num_months}
 
-app.run()
+  
+if __name__ == "__main__": 
+  app.run() 
