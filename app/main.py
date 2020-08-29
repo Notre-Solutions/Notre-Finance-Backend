@@ -3,6 +3,7 @@ from flask import request
 from flask import jsonify
 from datetime import datetime
 from math import ceil
+from flask_cors import CORS
 
 app = flask.Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
