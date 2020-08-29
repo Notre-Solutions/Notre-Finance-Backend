@@ -45,6 +45,7 @@ def monthlyMortgageCalc():
   monthlyMortgageIntRate = (mortgageIntRate/12)
   z = (1+monthlyMortgageIntRate)**(loanTerms*12)
   monthlyPayment = loanAmount*(monthlyMortgageIntRate*z)/(z - 1)
+  monthlyPayment = ceil(monthlyPayment*100)/100
   return {"monthlyMortgagePayment": monthlyPayment}
 
 if __name__ == "__main__": 
