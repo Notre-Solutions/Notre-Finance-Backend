@@ -2,7 +2,7 @@ config={
 	"housePrice": 100000,
 	"deposit": 0,
 	"mortgageIntRate": 0.06,
-	"loanTerms": 30
+	"loanTerms": 10
 }
 
 housePrice = float(config['housePrice'])
