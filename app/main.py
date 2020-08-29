@@ -34,17 +34,18 @@ def calcSaveAmountPerMonth():
   
   return {"savePerMonth": 0, "savingPeriod": num_months}
 
-# @app.route('/fiMortgageMonthlyPayments', methods=['POST'])
-# def monthlyMortgageCalc():
-#   housePrice = request.json['housePrice']
-#   deposit = request.json['deposit']
-#   mortgageIntRate = request.json['mortgageIntRate']
-#   loanTerms = request.json['loanTerms']
-  
-#   monthlyPayment = (housePrice * (mortgageIntRate/12) * (1 + (mortgageIntRate/12)^12(loanTerms)))/(1+(mortgageIntRate/12)^12(loanTerms)-1)
+@app.route('/fiMortgageMonthlyPayments', methods=['POST'])
+def monthlyMortgageCalc():
+  housePrice = request.json['housePrice']
+  deposit = request.json['deposit']
+  mortgageIntRate = request.json['mortgageIntRate']
+  loanTerms = request.json['loanTerms']
 
-
-#   return {"monthlyMortgagePayment": monthlyPayment}
+  loanAmount = housePrice - deposit
+  monthlyMortgageIntRate = (mortgageIntRate/12)
+  z = (1+monthlyMortgageIntRate)**(loanTerms*12)
+  monthlyPayment = loanAmount*(monthlyMortgageIntRate*z)/(z - 1)
+  return {"monthlyMortgagePayment": monthlyPayment}
 
 if __name__ == "__main__": 
   app.run() 
