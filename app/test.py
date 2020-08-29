@@ -11,10 +11,10 @@ mortgageIntRate = float(config['mortgageIntRate'])
 loanTerms = float(config['loanTerms'])
 
 monthlyMortgageIntRate = (mortgageIntRate/12)
-z = (1 + monthlyMortgageIntRate**(12*(loanTerms)))
+z = (1 + monthlyMortgageIntRate)**(loanTerms*12)-1
 
-monthlyPayment = (housePrice * monthlyMortgageIntRate * z)/z
-
+monthlyPayment = z
+# (housePrice * monthlyMortgageIntRate * z)/z
 # (housePrice * monthlyMortgageIntRate * (1 + monthlyMortgageIntRate**12*(loanTerms)))/
 
 print(monthlyPayment)
