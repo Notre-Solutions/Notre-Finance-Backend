@@ -4,6 +4,7 @@ from flask import jsonify
 from datetime import datetime
 from math import ceil
 from flask_cors import CORS
+from app.utils import *
 
 app = flask.Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -34,19 +35,14 @@ def calcSaveAmountPerMonth():
   
   return {"savePerMonth": 0, "savingPeriod": num_months}
 
-@app.route('/fiMortgageMonthlyPayments', methods=['POST'])
-def monthlyMortgageCalc():
+@app.route('/MortgageMonthlyPayments/<paymentType>', methods=['POST'])
+def monthlyMortgageCalc(paymentType):
   housePrice = request.json['housePrice']
   deposit = request.json['deposit']
   mortgageIntRate = request.json['mortgageIntRate']
   loanTerms = request.json['loanTerms']
 
-  loanAmount = housePrice - deposit
-  monthlyMortgageIntRate = (mortgageIntRate/12)
-  z = (1+monthlyMortgageIntRate)**(loanTerms*12)
-  monthlyPayment = loanAmount*(monthlyMortgageIntRate*z)/(z - 1)
-  monthlyPayment = ceil(monthlyPayment*100)/100
-  return {"monthlyMortgagePayment": monthlyPayment}
+  return calcMortgageMonthlyPayments(housePrice,deposit,mortgageIntRate,loanTerms,paymentType)
 
 if __name__ == "__main__": 
   app.run() 
